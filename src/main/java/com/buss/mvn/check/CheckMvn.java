@@ -1,22 +1,10 @@
 package com.buss.mvn.check;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CheckMvn {
 
-	public static void main(String[] args) {
-		final List<File> tmpList = new ArrayList<File>();
-
-		checkDirs(new File("C:\\Users\\Tony\\.m2\\repository"), f -> {
-			tmpList.add(f);
-		});
-
-		tmpList.forEach(System.out::println);
-	}
-
-	private static void checkDirs(File dir, HandResult hs) {
+	public static void checkDirs(File dir, HandResult hs) {
 		if (dir.isFile()) {
 			return;
 		}
