@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CheckMvn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mvn-check</a> &gt; <a href="index.source.html" class="el_package">com.buss.mvn.check</a> &gt; <span class="el_source">CheckMvn.java</span></div><h1>CheckMvn.java</h1><pre class="source lang-java linenums">package com.buss.mvn.check;
+
+import java.io.File;
+
+<span class="fc" id="L5">public class CheckMvn {</span>
+
+	public static void checkDirs(File dir, HandResult hs) {
+<span class="fc bfc" id="L8" title="All 2 branches covered.">		if (dir.isFile()) {</span>
+<span class="fc" id="L9">			return;</span>
+		}
+
+<span class="fc bfc" id="L12" title="All 2 branches covered.">		if (dir.listFiles(f -&gt; &quot;_remote.repositories&quot;.equals(f.getName())).length == 0) {</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">			for (File f : dir.listFiles(f -&gt; f.isDirectory())) {</span>
+<span class="fc" id="L14">				checkDirs(f, hs);</span>
+			}
+<span class="fc" id="L16">			return;</span>
+		}
+
+<span class="fc" id="L19">		File[] fs = dir.listFiles(f -&gt; {</span>
+<span class="fc" id="L20">			String version = f.getParentFile().getName();</span>
+<span class="fc" id="L21">			String jarName = f.getParentFile().getParentFile().getName();</span>
+<span class="fc" id="L22">			return f.getName().equals(jarName + &quot;-&quot; + version + &quot;.jar&quot;);</span>
+		});
+
+<span class="fc bfc" id="L25" title="All 2 branches covered.">		if (fs.length == 0) {</span>
+<span class="fc" id="L26">			hs.handResult(dir);</span>
+		}
+<span class="fc" id="L28">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
