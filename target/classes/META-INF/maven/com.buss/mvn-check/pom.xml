@@ -5,6 +5,22 @@
 	<groupId>com.buss</groupId>
 	<artifactId>mvn-check</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<jdk>1.8</jdk>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<java.version>1.8</java.version>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+		</profile>
+	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
@@ -24,38 +40,44 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
+					<!--这部分可有可无,加上的话则直接生成可运行jar包 -->
+					<archive>
+						<manifest>
+							<mainClass>com.buss.Main</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
-				<configuration>
-					<excludes>
-						<exclude>**/*MvnCheckFrame*.class</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default-prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.jacoco</groupId> -->
+<!-- 				<artifactId>jacoco-maven-plugin</artifactId> -->
+<!-- 				<version>0.8.3</version> -->
+<!-- 				<configuration> -->
+<!-- 					<excludes> -->
+<!-- 						<exclude>**/*Main*.class</exclude> -->
+<!-- 					</excludes> -->
+<!-- 				</configuration> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>default-prepare-agent</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>prepare-agent</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 					<execution> -->
+<!-- 						<id>default-report</id> -->
+<!-- 						<phase>prepare-package</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>report</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 		</plugins>
 	</build>
 </project>
