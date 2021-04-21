@@ -27,13 +27,13 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
-public class MvnCheckFrame extends JFrame {
+public class Main extends JFrame {
 
 	private static final long serialVersionUID = -7802818852803546674L;
 
 	private static final Object[] HEADER = new Object[] { "groupId", "artifactId", "version" };
 
-	public MvnCheckFrame() {
+	public Main() {
 		setTitle("mvn仓库检查");
 		setLayout(null);
 		setResizable(false);
@@ -194,7 +194,7 @@ public class MvnCheckFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new MvnCheckFrame();
+		new Main();
 	}
 
 	public static class FileUtil {
