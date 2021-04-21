@@ -16,10 +16,8 @@ public class TestCheckMvn {
 		final List<File> tmpList = new ArrayList<File>();
 
 		File file = new File("C:\\Users\\Tony\\.m2\\repository");
-		File file1 = new File("C:\\Users\\Tony\\.m2\\repository\\tools\\com.sun\\1.7\\m2e-lastUpdated.properties");
 
 		CheckMvn.checkDirs(file, tmpList::add);
-		CheckMvn.checkDirs(file1, f -> {});
 		
 		tmpList.forEach(System.out::println);
 		// 删除缺失jar包的目录
